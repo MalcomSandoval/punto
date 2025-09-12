@@ -1,0 +1,55 @@
+---
+export interface Props {
+  title: string;
+  value: string | number;
+  icon: string;
+  color: 'yellow' | 'red' | 'green' | 'blue';
+  change?: string;
+  changeType?: 'positive' | 'negative' | 'neutral';
+}
+
+const { title, value, icon, color, change, changeType } = Astro.props;
+
+const colorClasses = {
+  yellow: 'bg-baviera-yellow text-baviera-black',
+  red: 'bg-baviera-red text-white',
+  green: 'bg-green-500 text-white',
+  blue: 'bg-blue-500 text-white'
+};
+
+const changeClasses = {
+  positive: 'text-green-600',
+  negative: 'text-red-600',
+  neutral: 'text-gray-600'
+};
+---
+
+<div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-fade-in">
+  <div class="flex items-center justify-between">
+    <div class="flex-1">
+      <p class="text-baviera-black-light text-sm font-medium mb-1">{title}</p>
+      <p class="text-3xl font-bold text-baviera-black mb-2">{value}</p>
+      {change && (
+        <div class={`flex items-center text-sm ${changeClasses[changeType || 'neutral']}`}>
+          {changeType === 'positive' && (
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 17V7H7"></path>
+            </svg>
+          )}
+          {changeType === 'negative' && (
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 7l-9.2 9.2M7 7v10h10"></path>
+            </svg>
+          )}
+          <span>{change}</span>
+        </div>
+      )}
+    </div>
+    
+    <div class={`p-4 rounded-xl ${colorClasses[color]} shadow-md`}>
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+      </svg>
+    </div>
+  </div>
+</div>

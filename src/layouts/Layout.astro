@@ -1,0 +1,154 @@
+---
+export interface Props {
+  title: string;
+  showSidebar?: boolean;
+}
+
+const { title, showSidebar = true } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Punto Frío donde Beto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="h-full bg-baviera-gray font-sans antialiased">
+    <div class="min-h-full">
+      <!-- Navbar superior -->
+      <nav class="bg-baviera-black shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+            <div class="flex items-center">
+              {showSidebar && (
+                <button id="sidebar-toggle" class="md:hidden text-baviera-white hover:text-baviera-yellow mr-4 transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </button>
+              )}
+              <div class="flex items-center">
+                <div class="bg-baviera-yellow p-2 rounded-lg mr-3">
+                  <svg class="w-8 h-8 text-baviera-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <h1 class="text-xl font-bold text-baviera-white">
+                  Punto Frío <span class="text-baviera-yellow">donde Beto</span>
+                </h1>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+              <div class="text-baviera-white">
+                <span class="text-sm">Bienvenido, <span class="text-baviera-yellow font-medium">Admin</span></span>
+              </div>
+              <button class="bg-baviera-red hover:bg-baviera-red-dark text-white px-4 py-2 rounded-lg transition-colors">
+                Cerrar Sesión
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="flex h-screen overflow-hidden">
+        {showSidebar && (
+          <!-- Sidebar -->
+          <aside id="sidebar" class="bg-baviera-white shadow-xl w-64 fixed inset-y-0 left-0 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:inset-0">
+            <div class="flex flex-col h-full pt-16 md:pt-5">
+              <nav class="flex-1 px-4 py-6 space-y-2">
+                <a href="/" class="nav-item group flex items-center px-4 py-3 text-baviera-black hover:bg-baviera-yellow hover:text-baviera-black rounded-xl transition-all duration-200">
+                  <svg class="mr-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v4H8V5z"></path>
+                  </svg>
+                  Dashboard
+                </a>
+                
+                <a href="/ventas" class="nav-item group flex items-center px-4 py-3 text-baviera-black hover:bg-baviera-yellow hover:text-baviera-black rounded-xl transition-all duration-200">
+                  <svg class="mr-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                  </svg>
+                  Ventas
+                </a>
+                
+                <a href="/inventario" class="nav-item group flex items-center px-4 py-3 text-baviera-black hover:bg-baviera-yellow hover:text-baviera-black rounded-xl transition-all duration-200">
+                  <svg class="mr-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"></path>
+                  </svg>
+                  Inventario
+                </a>
+                
+                <a href="/reportes" class="nav-item group flex items-center px-4 py-3 text-baviera-black hover:bg-baviera-yellow hover:text-baviera-black rounded-xl transition-all duration-200">
+                  <svg class="mr-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
+                  Reportes
+                </a>
+              </nav>
+              
+              <div class="px-4 py-4 border-t border-gray-200">
+                <div class="text-xs text-gray-500 text-center">
+                  © 2025 Punto Frío donde Beto
+                </div>
+              </div>
+            </div>
+          </aside>
+        )}
+
+        <!-- Overlay para móvil -->
+        <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 hidden md:hidden"></div>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 overflow-y-auto {showSidebar ? 'md:ml-0' : ''} bg-baviera-gray">
+          <div class="p-6">
+            <slot />
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // Toggle sidebar en móvil
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      
+      if (sidebarToggle && sidebar && overlay) {
+        sidebarToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('-translate-x-full');
+          overlay.classList.toggle('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+          sidebar.classList.add('-translate-x-full');
+          overlay.classList.add('hidden');
+        });
+      }
+
+      // Marcar elemento activo del menú
+      const currentPath = window.location.pathname;
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if ((currentPath === '/' && href === '/') || (currentPath !== '/' && href !== '/' && currentPath.startsWith(href))) {
+          item.classList.add('bg-baviera-yellow', 'text-baviera-black');
+          item.classList.remove('text-baviera-black');
+        }
+      });
+    </script>
+
+    <style>
+      .nav-item:hover {
+        transform: translateX(4px);
+      }
+    </style>
+  </body>
+</html>

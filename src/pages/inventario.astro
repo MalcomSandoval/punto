@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+// Datos de ejemplo - en producción vendrían de Supabase
+const productosEjemplo = [
+  {
+    id: 1,
+    nombre: 'Cerveza Águila',
+    stock: 45,
+    precio: 3000,
+    categoria: 'bebidas alcohólicas'
+  },
+  {
+    id: 2,
+    nombre: 'Gaseosa Coca-Cola',
+    stock: 32,
+    precio: 2000,
+    categoria: 'gaseosas'
+  },
+  {
+    id: 3,
+    nombre: 'Agua en Botella',
+    stock: 8,
+    precio: 1000,
+    categoria: 'bebidas'
+  },
+  {
+    id: 4,
+    nombre: 'Jugo Hit',
+    stock: 15,
+    precio: 2500,
+    categoria: 'jugos'
+  },
+  {
+    id: 5,
+    nombre: 'Cerveza Corona',
+    stock: 22,
+    precio: 3500,
+    categoria: 'bebidas alcohólicas'
+  },
+  {
+    id: 6,
+    nombre: 'Ron Medellín',
+    stock: 3,
+    precio: 45000,
+    categoria: 'licores'
+  }
+];
+---
+
+<Layout title="Inventario">
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 animate-fade-in">
+      <div>
+        <h1 class="text-3xl font-bold text-baviera-black mb-2">Gestión de Inventario</h1>
+        <p class="text-baviera-black-light">Administra el stock y precios de todos los productos</p>
+      </div>
+      
+      <button id="nuevo-producto-btn" class="bg-baviera-yellow hover:bg-baviera-yellow-dark text-baviera-black font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Nuevo Producto
+      </button>
+    </div>
+    
+    <!-- Estadísticas del inventario -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-baviera-black-light text-sm font-medium mb-1">Total Productos</p>
+            <p class="text-3xl font-bold text-baviera-black">{productosEjemplo.length}</p>
+          </div>
+          <div class="p-3 bg-baviera-yellow rounded-lg">
+            <svg class="w-6 h-6 text-baviera-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-baviera-black-light text-sm font-medium mb-1">Stock Total</p>
+            <p class="text-3xl font-bold text-baviera-black">{productosEjemplo.reduce((sum, p) => sum + p.stock, 0)}</p>
+          </div>
+          <div class="p-3 bg-blue-500 rounded-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-baviera-black-light text-sm font-medium mb-1">Stock Crítico</p>
+            <p class="text-3xl font-bold text-baviera-red">{productosEjemplo.filter(p => p.stock <= 5).length}</p>
+          </div>
+          <div class="p-3 bg-baviera-red rounded-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-baviera-black-light text-sm font-medium mb-1">Valor Total</p>
+            <p class="text-2xl font-bold text-baviera-yellow">${productosEjemplo.reduce((sum, p) => sum + (p.precio * p.stock), 0).toLocaleString('es-CO')}</p>
+          </div>
+          <div class="p-3 bg-green-500 rounded-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Filtros y búsqueda -->
+    <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
+          <input 
+            type="text" 
+            placeholder="Buscar productos..." 
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all"
+          />
+        </div>
+        
+        <div class="flex gap-2">
+          <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+            <option value="">Todas las categorías</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="gaseosas">Gaseosas</option>
+            <option value="jugos">Jugos</option>
+            <option value="licores">Licores</option>
+            <option value="bebidas alcohólicas">Bebidas Alcohólicas</option>
+          </select>
+          
+          <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+            <option value="">Stock: Todos</option>
+            <option value="alto">Stock alto (>10)</option>
+            <option value="medio">Stock medio (5-10)</option>
+            <option value="bajo">Stock bajo (<5)</option>
+          </select>
+          
+          <button class="bg-baviera-black hover:bg-baviera-black-light text-white px-6 py-3 rounded-lg transition-colors">
+            Filtrar
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Grid de productos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {productosEjemplo.map(producto => (
+        <ProductCard producto={producto} />
+      ))}
+    </div>
+  </div>
+  
+  <!-- Modal Nuevo Producto -->
+  <div id="modal-nuevo-producto" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl p-8 max-w-lg w-full max-h-screen overflow-y-auto animate-bounce-soft">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-baviera-black">Nuevo Producto</h3>
+        <button id="cerrar-modal-producto" class="text-gray-500 hover:text-gray-700 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-baviera-black mb-2">Nombre del Producto</label>
+          <input 
+            type="text" 
+            placeholder="Ej: Cerveza Águila"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all"
+          />
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-baviera-black mb-2">Precio</label>
+            <input 
+              type="number" 
+              min="0" 
+              step="100"
+              placeholder="3000"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all"
+            />
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-baviera-black mb-2">Stock Inicial</label>
+            <input 
+              type="number" 
+              min="0"
+              placeholder="50"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all"
+            />
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-baviera-black mb-2">Categoría</label>
+          <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+            <option value="">Seleccionar categoría...</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="gaseosas">Gaseosas</option>
+            <option value="jugos">Jugos</option>
+            <option value="licores">Licores</option>
+            <option value="bebidas alcohólicas">Bebidas Alcohólicas</option>
+            <option value="snacks">Snacks</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+        
+        <div class="flex gap-3 pt-6">
+          <button type="button" id="cancelar-producto" class="flex-1 bg-gray-300 hover:bg-gray-400 text-baviera-black font-medium py-3 rounded-lg transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" class="flex-1 bg-baviera-yellow hover:bg-baviera-yellow-dark text-baviera-black font-medium py-3 rounded-lg transition-colors">
+            Crear Producto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Modal functionality
+  const modalNuevoProducto = document.getElementById('modal-nuevo-producto');
+  const btnNuevoProducto = document.getElementById('nuevo-producto-btn');
+  const btnCerrarModalProducto = document.getElementById('cerrar-modal-producto');
+  const btnCancelarProducto = document.getElementById('cancelar-producto');
+  
+  btnNuevoProducto?.addEventListener('click', () => {
+    modalNuevoProducto?.classList.remove('hidden');
+  });
+  
+  btnCerrarModalProducto?.addEventListener('click', () => {
+    modalNuevoProducto?.classList.add('hidden');
+  });
+  
+  btnCancelarProducto?.addEventListener('click', () => {
+    modalNuevoProducto?.classList.add('hidden');
+  });
+  
+  modalNuevoProducto?.addEventListener('click', (e) => {
+    if (e.target === modalNuevoProducto) {
+      modalNuevoProducto.classList.add('hidden');
+    }
+  });
+</script>

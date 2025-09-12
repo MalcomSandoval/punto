@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VentaCard from '../components/VentaCard.astro';
+
+// Datos de ejemplo - en producción vendrían de Supabase
+const ventasEjemplo = [
+  {
+    id: 1,
+    cantidad: 6,
+    total: 18000,
+    fecha: '2025-01-15T10:30:00Z',
+    productos: {
+      nombre: 'Cerveza Águila',
+      precio: 3000
+    }
+  },
+  {
+    id: 2,
+    cantidad: 4,
+    total: 8000,
+    fecha: '2025-01-15T11:45:00Z',
+    productos: {
+      nombre: 'Gaseosa Coca-Cola',
+      precio: 2000
+    }
+  },
+  {
+    id: 3,
+    cantidad: 12,
+    total: 12000,
+    fecha: '2025-01-15T14:20:00Z',
+    productos: {
+      nombre: 'Agua en Botella',
+      precio: 1000
+    }
+  }
+];
+---
+
+<Layout title="Ventas">
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 animate-fade-in">
+      <div>
+        <h1 class="text-3xl font-bold text-baviera-black mb-2">Gestión de Ventas</h1>
+        <p class="text-baviera-black-light">Registra y consulta todas las ventas del negocio</p>
+      </div>
+      
+      <button id="nueva-venta-btn" class="bg-baviera-yellow hover:bg-baviera-yellow-dark text-baviera-black font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Nueva Venta
+      </button>
+    </div>
+    
+    <!-- Filtros y búsqueda -->
+    <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
+          <input 
+            type="text" 
+            placeholder="Buscar por producto..." 
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all"
+          />
+        </div>
+        
+        <div class="flex gap-2">
+          <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+            <option value="">Todas las fechas</option>
+            <option value="hoy">Hoy</option>
+            <option value="semana">Esta semana</option>
+            <option value="mes">Este mes</option>
+          </select>
+          
+          <button class="bg-baviera-black hover:bg-baviera-black-light text-white px-6 py-3 rounded-lg transition-colors">
+            Filtrar
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Grid de ventas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {ventasEjemplo.map(venta => (
+        <VentaCard venta={venta} />
+      ))}
+    </div>
+    
+    <!-- Resumen del día -->
+    <div class="bg-white rounded-xl p-6 shadow-lg animate-fade-in">
+      <h2 class="text-xl font-bold text-baviera-black mb-6 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-baviera-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+        Resumen del Día
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-baviera-yellow mb-2">23</div>
+          <div class="text-baviera-black-light">Ventas Realizadas</div>
+        </div>
+        
+        <div class="text-center">
+          <div class="text-3xl font-bold text-baviera-yellow mb-2">$485,000</div>
+          <div class="text-baviera-black-light">Ingresos Totales</div>
+        </div>
+        
+        <div class="text-center">
+          <div class="text-3xl font-bold text-baviera-yellow mb-2">$21,087</div>
+          <div class="text-baviera-black-light">Venta Promedio</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Nueva Venta -->
+  <div id="modal-nueva-venta" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full max-h-screen overflow-y-auto animate-bounce-soft">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-baviera-black">Nueva Venta</h3>
+        <button id="cerrar-modal" class="text-gray-500 hover:text-gray-700 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-baviera-black mb-2">Producto</label>
+          <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+            <option value="">Seleccionar producto...</option>
+            <option value="1">Cerveza Águila - $3,000</option>
+            <option value="2">Gaseosa Coca-Cola - $2,000</option>
+            <option value="3">Agua en Botella - $1,000</option>
+            <option value="4">Jugo Hit - $2,500</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-baviera-black mb-2">Cantidad</label>
+          <input 
+            type="number" 
+            min="1" 
+            value="1"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all"
+          />
+        </div>
+        
+        <div class="bg-baviera-gray p-4 rounded-lg">
+          <div class="flex justify-between items-center">
+            <span class="text-baviera-black font-medium">Total:</span>
+            <span class="text-2xl font-bold text-baviera-yellow">$0</span>
+          </div>
+        </div>
+        
+        <div class="flex gap-3 pt-4">
+          <button type="button" id="cancelar-venta" class="flex-1 bg-gray-300 hover:bg-gray-400 text-baviera-black font-medium py-3 rounded-lg transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" class="flex-1 bg-baviera-yellow hover:bg-baviera-yellow-dark text-baviera-black font-medium py-3 rounded-lg transition-colors">
+            Registrar Venta
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Modal functionality
+  const modalNuevaVenta = document.getElementById('modal-nueva-venta');
+  const btnNuevaVenta = document.getElementById('nueva-venta-btn');
+  const btnCerrarModal = document.getElementById('cerrar-modal');
+  const btnCancelarVenta = document.getElementById('cancelar-venta');
+  
+  btnNuevaVenta?.addEventListener('click', () => {
+    modalNuevaVenta?.classList.remove('hidden');
+  });
+  
+  btnCerrarModal?.addEventListener('click', () => {
+    modalNuevaVenta?.classList.add('hidden');
+  });
+  
+  btnCancelarVenta?.addEventListener('click', () => {
+    modalNuevaVenta?.classList.add('hidden');
+  });
+  
+  modalNuevaVenta?.addEventListener('click', (e) => {
+    if (e.target === modalNuevaVenta) {
+      modalNuevaVenta.classList.add('hidden');
+    }
+  });
+</script>

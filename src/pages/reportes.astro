@@ -1,0 +1,305 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Reportes">
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="animate-fade-in">
+      <h1 class="text-3xl font-bold text-baviera-black mb-2">Reportes y Análisis</h1>
+      <p class="text-baviera-black-light">Estadísticas detalladas del negocio</p>
+    </div>
+    
+    <!-- Filtros de tiempo -->
+    <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
+          <h3 class="text-lg font-semibold text-baviera-black mb-4">Período de Análisis</h3>
+          <div class="flex flex-wrap gap-2">
+            <button class="bg-baviera-yellow text-baviera-black px-4 py-2 rounded-lg font-medium">Hoy</button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-baviera-black px-4 py-2 rounded-lg transition-colors">Esta Semana</button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-baviera-black px-4 py-2 rounded-lg transition-colors">Este Mes</button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-baviera-black px-4 py-2 rounded-lg transition-colors">Último Trimestre</button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-baviera-black px-4 py-2 rounded-lg transition-colors">Este Año</button>
+          </div>
+        </div>
+        
+        <div class="flex gap-2">
+          <input type="date" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+          <input type="date" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-baviera-yellow focus:border-transparent transition-all">
+          <button class="bg-baviera-black hover:bg-baviera-black-light text-white px-6 py-3 rounded-lg transition-colors">
+            Aplicar
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Métricas principales -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-baviera-yellow rounded-lg">
+            <svg class="w-6 h-6 text-baviera-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <p class="text-baviera-black-light text-sm font-medium mb-1">Ventas Totales</p>
+          <p class="text-3xl font-bold text-baviera-black mb-2">$2,485,300</p>
+          <div class="flex items-center text-green-600 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 17V7H7"></path>
+            </svg>
+            +15.3% vs mes anterior
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-baviera-red rounded-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <p class="text-baviera-black-light text-sm font-medium mb-1">Transacciones</p>
+          <p class="text-3xl font-bold text-baviera-black mb-2">1,247</p>
+          <div class="flex items-center text-green-600 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 17V7H7"></path>
+            </svg>
+            +8.7% vs mes anterior
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-blue-500 rounded-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <p class="text-baviera-black-light text-sm font-medium mb-1">Ticket Promedio</p>
+          <p class="text-3xl font-bold text-baviera-black mb-2">$19,935</p>
+          <div class="flex items-center text-green-600 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 17V7H7"></path>
+            </svg>
+            +5.2% vs mes anterior
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-green-500 rounded-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <p class="text-baviera-black-light text-sm font-medium mb-1">Productos Vendidos</p>
+          <p class="text-3xl font-bold text-baviera-black mb-2">3,521</p>
+          <div class="flex items-center text-red-600 text-sm">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 7l-9.2 9.2M7 7v10h10"></path>
+            </svg>
+            -2.1% vs mes anterior
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gráficos -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Ventas por día -->
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-fade-in">
+        <h3 class="text-xl font-bold text-baviera-black mb-6 flex items-center">
+          <svg class="w-6 h-6 mr-2 text-baviera-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Ventas por Día (Últimos 7 días)
+        </h3>
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-sm text-baviera-black-light">Lun</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-yellow h-3 rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$425,000</span>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-sm text-baviera-black-light">Mar</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-yellow h-3 rounded-full" style="width: 70%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$350,000</span>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-sm text-baviera-black-light">Mié</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-yellow h-3 rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$460,000</span>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-sm text-baviera-black-light">Jue</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-yellow h-3 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$500,000</span>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-sm text-baviera-black-light">Vie</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-yellow h-3 rounded-full" style="width: 78%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$390,000</span>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-baviera-black-light">Sáb</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-red h-3 rounded-full" style="width: 95%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$475,000</span>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-12 text-baviera-black-light">Dom</div>
+              <div class="flex-1 bg-baviera-gray rounded-full h-3 mx-2">
+                <div class="bg-baviera-red h-3 rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+            <span class="text-baviera-black font-medium">$440,000</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Top productos -->
+      <div class="bg-white rounded-xl p-6 shadow-lg animate-fade-in">
+        <h3 class="text-xl font-bold text-baviera-black mb-6 flex items-center">
+          <svg class="w-6 h-6 mr-2 text-baviera-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+          </svg>
+          Productos Más Vendidos
+        </h3>
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-3 bg-baviera-yellow bg-opacity-20 rounded-lg border-l-4 border-baviera-yellow">
+            <div>
+              <p class="font-semibold text-baviera-black">Cerveza Águila</p>
+              <p class="text-sm text-baviera-black-light">267 unidades vendidas</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-baviera-black">$801,000</p>
+              <p class="text-sm text-baviera-black-light">32.2% del total</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between p-3 bg-baviera-red bg-opacity-20 rounded-lg border-l-4 border-baviera-red">
+            <div>
+              <p class="font-semibold text-baviera-black">Gaseosa Coca-Cola</p>
+              <p class="text-sm text-baviera-black-light">198 unidades vendidas</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-baviera-black">$396,000</p>
+              <p class="text-sm text-baviera-black-light">15.9% del total</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between p-3 bg-blue-100 rounded-lg border-l-4 border-blue-500">
+            <div>
+              <p class="font-semibold text-baviera-black">Agua en Botella</p>
+              <p class="text-sm text-baviera-black-light">145 unidades vendidas</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-baviera-black">$145,000</p>
+              <p class="text-sm text-baviera-black-light">5.8% del total</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between p-3 bg-green-100 rounded-lg border-l-4 border-green-500">
+            <div>
+              <p class="font-semibold text-baviera-black">Jugo Hit</p>
+              <p class="text-sm text-baviera-black-light">112 unidades vendidas</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-baviera-black">$280,000</p>
+              <p class="text-sm text-baviera-black-light">11.3% del total</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between p-3 bg-purple-100 rounded-lg border-l-4 border-purple-500">
+            <div>
+              <p class="font-semibold text-baviera-black">Ron Medellín</p>
+              <p class="text-sm text-baviera-black-light">23 unidades vendidas</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-baviera-black">$1,035,000</p>
+              <p class="text-sm text-baviera-black-light">41.7% del total</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Acciones de exportación -->
+    <div class="bg-white rounded-xl p-6 shadow-lg animate-slide-up">
+      <h3 class="text-xl font-bold text-baviera-black mb-6 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-baviera-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        Exportar Reportes
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <button class="flex items-center justify-center p-4 border-2 border-baviera-yellow rounded-xl hover:bg-baviera-yellow hover:text-baviera-black transition-all duration-300 group">
+          <svg class="w-6 h-6 mr-2 text-baviera-yellow group-hover:text-baviera-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span class="font-medium">Exportar PDF</span>
+        </button>
+        
+        <button class="flex items-center justify-center p-4 border-2 border-baviera-red rounded-xl hover:bg-baviera-red hover:text-white transition-all duration-300 group">
+          <svg class="w-6 h-6 mr-2 text-baviera-red group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span class="font-medium">Exportar Excel</span>
+        </button>
+        
+        <button class="flex items-center justify-center p-4 border-2 border-baviera-black rounded-xl hover:bg-baviera-black hover:text-white transition-all duration-300 group">
+          <svg class="w-6 h-6 mr-2 text-baviera-black group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          <span class="font-medium">Enviar por Email</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>
